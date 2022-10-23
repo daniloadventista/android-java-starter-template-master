@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +16,25 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnKeyListener {
 
     Boolean changeSignpModeActive = true;
 
     TextView changeSignpModeTextView;
 
+    EditText usernameEditText;
+
+    EditText passwordEditText;
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+
+            signUp(v);
+
+        }
+        return false;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         changeSignpModeTextView = (TextView) findViewById(R.id.changeSignpModeTextView);
         changeSignpModeTextView.setOnClickListener(this);
-
+        usernameEditText = (EditText) findViewById(R.id.usernameEditText);
+        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        passwordEditText.setOnKeyListener(this);
     }
 
     public void signUp(View view){
-
-        EditText usernameEditText = (EditText) findViewById(R.id.usernameEditText);
-
-        EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
         if (usernameEditText.getText().toString().matches("")
         || passwordEditText.getText().toString().matches("")){
@@ -58,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+                Toast.makeText(this, "Sign Up, Successful",
+                        Toast.LENGTH_SHORT).show();
             } else {
 
                 ParseUser.logInInBackground(usernameEditText.getText().toString()
@@ -69,9 +83,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }else{
                             Log.d("Login", "Failed " + e.toString());
                         }
-
                     }
                 });
+                Toast.makeText(this, "Login, Successfull",
+                        Toast.LENGTH_SHORT).show();
 
             }
 
@@ -103,17 +118,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-    /*
-    public static boolean isValidPassword(final String password) {
-
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-
-        return matcher.matches();
-
-    }*/
 
 }
