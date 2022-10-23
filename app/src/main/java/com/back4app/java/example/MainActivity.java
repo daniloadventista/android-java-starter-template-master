@@ -1,13 +1,16 @@
 package com.back4app.java.example;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText usernameEditText;
 
     EditText passwordEditText;
+
+    ConstraintLayout  backgroundRelativeLayout;
+    ImageView logoImageView;
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -45,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         passwordEditText.setOnKeyListener(this);
+        backgroundRelativeLayout = (ConstraintLayout) findViewById(R.id.backgroundRelativeLayout);
+        logoImageView = (ImageView) findViewById(R.id.logoImageView);
+        backgroundRelativeLayout.setOnClickListener(this);
+        logoImageView.setOnClickListener(this);
     }
 
     public void signUp(View view){
@@ -116,6 +126,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
+        } else if (view.getId() == R.id.backgroundRelativeLayout || view.getId() == R.id.logoImageView) {
+
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) getSystemService(
+                            INPUT_METHOD_SERVICE);
+            if(inputMethodManager.isAcceptingText()) {
+                inputMethodManager.hideSoftInputFromWindow(
+                        getCurrentFocus().getWindowToken(),
+                        0
+                );
+            }
         }
     }
 

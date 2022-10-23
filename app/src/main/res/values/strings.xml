@@ -5,7 +5,12 @@
     <string name="back4app_server_url" translatable="false">http://ec2-52-67-121-91.sa-east-1.compute.amazonaws.com/</string>
     <string name="back4app_app_id" translatable="false">myappID</string>
     <string name="back4app_client_key" translatable="false">7t1HSggB0IrA</string>
-
+    <string name="v_0_1">v 0.1</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_your_user_name">Enter your user name</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="or_login">or Login</string>
+    <string name="logo">logo</string>
 
 
 </resources>
