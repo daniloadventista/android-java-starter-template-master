@@ -3,6 +3,7 @@ package com.back4app.java.example;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -30,8 +31,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText passwordEditText;
 
     ConstraintLayout  backgroundRelativeLayout;
+
     ImageView logoImageView;
 
+
+    public void showUserList() {
+
+        Intent intent = new Intent(getApplicationContext(), SampleListActivity.class);
+        startActivity(intent);
+
+    }
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -55,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         logoImageView = (ImageView) findViewById(R.id.logoImageView);
         backgroundRelativeLayout.setOnClickListener(this);
         logoImageView.setOnClickListener(this);
+
+        if (ParseUser.getCurrentUser() != null) {
+            showUserList();
+        }
     }
 
     public void signUp(View view){
@@ -75,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void done(ParseException e) {
                         if (e == null) {
                             Log.d("Sign Up", "Successful");
+                            showUserList();
                         } else {
                             Log.d("Sign Up", "Error: " + e.getMessage());
                         }
@@ -90,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void done(ParseUser user, ParseException e) {
                         if (user != null){
                             Log.d("Login", "Successfull");
+                            showUserList();
                         }else{
                             Log.d("Login", "Failed " + e.toString());
                         }
