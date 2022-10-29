@@ -1,5 +1,6 @@
 package com.back4app.java.example;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -7,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -35,9 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView logoImageView;
 
 
-    public void showUserList() {
+    public void showCutActivity() {
 
-        Intent intent = new Intent(getApplicationContext(), SampleListActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ShortCutActivity.class);
         startActivity(intent);
 
     }
@@ -66,8 +70,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         logoImageView.setOnClickListener(this);
 
         if (ParseUser.getCurrentUser() != null) {
-            showUserList();
+            showCutActivity();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.get_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.home:
+                Toast.makeText(this, "You clicked on Home "
+                        , Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.back:
+                Toast.makeText(this, "You clicked on Back "
+                        , Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.next:
+                Toast.makeText(this, "You clicked on Next "
+                        , Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.subItem1:
+                Toast.makeText(this, "You clicked on SubItem1 "
+                        , Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
     }
 
     public void signUp(View view){
@@ -88,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void done(ParseException e) {
                         if (e == null) {
                             Log.d("Sign Up", "Successful");
-                            showUserList();
+                            showCutActivity();
                         } else {
                             Log.d("Sign Up", "Error: " + e.getMessage());
                         }
@@ -104,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void done(ParseUser user, ParseException e) {
                         if (user != null){
                             Log.d("Login", "Successfull");
-                            showUserList();
+                            showCutActivity();
                         }else{
                             Log.d("Login", "Failed " + e.toString());
                         }

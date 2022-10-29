@@ -17,14 +17,21 @@
         android:theme="@style/Theme.Back4AppExample"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".SampleListActivity"
+            android:name=".ShortCutActivity"
             android:exported="false"
             android:screenOrientation="landscape">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <!-- PARSE -->
+        <activity
+            android:name=".SampleListActivity"
+            android:exported="false"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity> <!-- PARSE -->
         <meta-data
             android:name="com.parse.SERVER_URL"
             android:value="@string/back4app_server_url" />
