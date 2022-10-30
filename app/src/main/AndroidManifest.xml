@@ -17,6 +17,14 @@
         android:theme="@style/Theme.Back4AppExample"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SampleInsertActivity"
+            android:exported="false"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ShortCutActivity"
             android:exported="false"
             android:screenOrientation="landscape">

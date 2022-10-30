@@ -40,6 +40,7 @@ public class SampleListActivity extends AppCompatActivity implements MyRecyclerV
         buttonAdd.setOnClickListener(
                 view -> {
                     Toast.makeText(this, "You clicked on Add ", Toast.LENGTH_SHORT).show();
+                    showSampleInsertActivity();
                 }
         );
 
@@ -129,5 +130,12 @@ public class SampleListActivity extends AppCompatActivity implements MyRecyclerV
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+    }
+    //SampleInsertActivity
+    public void showSampleInsertActivity(){
+        Toast.makeText(this, "Indo para Insere Amostra",
+                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), SampleInsertActivity.class);
+        startActivity(intent);
     }
 }
